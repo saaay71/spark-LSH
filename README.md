@@ -1,4 +1,4 @@
-# Locality Sensitive Hashing (LSH) using Spark for clustering
+# Locality Sensitive Hashing (LSH) using Spark for Clustering
 
 to be updated.
 
