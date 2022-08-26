@@ -32,7 +32,7 @@ trained_LSHModel.write().overwrite().save(MODEL_PATH)
 ```
 saved_LSHModel = PipelineModel.load(MODEL_PATH)
 
-df = saved_LSHModel.transform(df)
+df = saved_LSHModel.transform(df).select("id", "Text", "hashes")
 df.show(truncate=False)
 
 +---+--------------------------------------------------------------------------+------------------------------------------------+
