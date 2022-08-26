@@ -8,14 +8,14 @@ Locality Sensitive Hashing (LSH) using Spark for clustering
 ```
 df = spark.read.format("csv").option("header",True) .load("data.csv")
 df.show(truncate=False)
-+---+--------------------------------------------------------------------------+
-|id |Text                                                                      |
-+---+--------------------------------------------------------------------------+
-|1  |This is an example. Let's see if it can produce hashes close to next line.|
-|2  |This is another example. it should produce hashes close to previous line. |
-|3  |here we are using a different text and saying hello world!                |
-|4  |hello world! is different here because we are using it first.             |
-+---+--------------------------------------------------------------------------+
++---+------------------------------------------------------------------------------+
+|id |Text                                                                          |
++---+------------------------------------------------------------------------------+
+|1  |This is an example. Let's see if it can produce hashes close to the next line.|
+|2  |This is another example. It should produce hashes close to the previous line. |
+|3  |here we are using a different text and saying hello world!                    |
+|4  |hello world! is different here because we are using and saying them first.    |
++---+------------------------------------------------------------------------------+
 ```
 
 
@@ -35,12 +35,12 @@ saved_LSHModel = PipelineModel.load(MODEL_PATH)
 df = saved_LSHModel.transform(df).select("id", "Text", "hashes")
 df.show(truncate=False)
 
-+---+--------------------------------------------------------------------------+------------------------------------------------+
-|id |Text                                                                      |hashes                                          |
-+---+--------------------------------------------------------------------------+------------------------------------------------+
-|1  |This is an example. Let's see if it can produce hashes close to next line.|[41879091, 6320997, 5784988, 724070, 18556512]  |
-|2  |This is another example. it should produce hashes close to previous line. |[41879091, 13769064, 3753495, 724070, 18556512] |
-|3  |here we are using a different text and saying hello world!                |[21235875, 124956191, 5784988, 31714247, 415965]|
-|4  |hello world! is different here because we are using it first.             |[21235875, 21217131, 1722002, 31714247, 415965] |
-+---+--------------------------------------------------------------------------+------------------------------------------------+
++---+------------------------------------------------------------------------------+-------------------------------------------------+
+|id |Text                                                                          |hashes                                           |
++---+------------------------------------------------------------------------------+-------------------------------------------------+
+|1  |This is an example. Let's see if it can produce hashes close to the next line.|[21235875, 6320997, 3753495, 724070, 415965]     |
+|2  |This is another example. It should produce hashes close to the previous line. |[21235875, 13769064, 1722002, 724070, 415965]    |
+|3  |here we are using a different text and saying hello world!                    |[31557483, 47151896, 5784988, 21384188, 870083]  |
+|4  |hello world! is different here because we are using and saying them first.    |[31557483, 39703829, 5784988, 21384188, 18556512]|
++---+------------------------------------------------------------------------------+-------------------------------------------------+
 ```
